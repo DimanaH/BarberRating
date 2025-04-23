@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Barber>
+@{
+    ViewData["Title"] = "Бръснари";
+}
+
+<h2>Бръснари</h2>
+
+<a asp-action="AddBarber" class="btn btn-success mb-3">Добави бръснар</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Снимка</th>
+            <th>Име</th>
+            <th>Описание</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var barber in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(barber.PhotoPath))
+                    {
+                        <img src="@barber.PhotoPath" width="100" />
+                    }
+                </td>
+                <td>@barber.Name</td>
+                <td>@barber.Description</td>
+                <td>
+                    <a asp-action="EditBarber" asp-route-id="@barber.Id" class="btn btn-primary btn-sm">Редактирай</a>
+                    <a asp-action="DeleteBarber" asp-route-id="@barber.Id" class="btn btn-danger btn-sm">Изтрий</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

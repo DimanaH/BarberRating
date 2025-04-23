@@ -1,0 +1,23 @@
+﻿@model Barber
+@{
+    ViewData["Title"] = "Изтриване на бръснар";
+}
+
+<h2>Изтриване на бръснар</h2>
+
+<div>
+    <p>Сигурни ли сте, че искате да изтриете <strong>@Model.Name</strong>?</p>
+
+    @if (!string.IsNullOrEmpty(Model.PhotoPath))
+    {
+        <img src="@Model.PhotoPath" width="150" />
+    }
+
+    <p>@Model.Description</p>
+</div>
+
+<form asp-action="DeleteBarber">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Да, изтрий</button>
+    <a asp-action="Barbers" class="btn btn-secondary">Отказ</a>
+</form>

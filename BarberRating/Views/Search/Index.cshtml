@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Barber>
+@{
+    ViewData["Title"] = "Търсене на бръснари";
+}
+
+<h2>Търсене на бръснари</h2>
+
+<form method="get" asp-controller="Search" asp-action="Index">
+    <input type="text" name="query" value="@ViewBag.Query" placeholder="Въведи име..." class="form-control mb-3" />
+    <button type="submit" class="btn btn-primary">Търси</button>
+</form>
+
+@if (!Model.Any())
+{
+    <p>Няма намерени резултати.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var barber in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(barber.PhotoPath))
+                    {
+                        <img class="card-img-top" src="@barber.PhotoPath" alt="Снимка на бръснаря" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@barber.Name</h5>
+                        <p class="card-text">@barber.Description</p>
+                        <a asp-controller="BarberPublic" asp-action="Details" asp-route-id="@barber.Id" class="btn btn-outline-secondary">
+                            Виж детайли
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

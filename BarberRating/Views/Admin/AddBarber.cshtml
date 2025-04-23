@@ -1,0 +1,43 @@
+﻿@model BarberFormViewModel
+@{
+    ViewData["Title"] = "Добави бръснар" ;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action= "AddBarber" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Image" class="form-label"></label>
+        <input asp-for="Image" type="file" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.ExistingImagePath))
+    {
+        <div class="mb-3">
+            <label>Текуща снимка:</label><br />
+            <img src="@Model.ExistingImagePath" width="150" />
+        </div>
+    }
+
+    <button type="submit" class="btn btn-success">Запази</button>
+    <a asp-action="Barbers" class="btn btn-secondary">Отказ</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

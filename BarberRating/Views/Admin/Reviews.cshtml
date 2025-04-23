@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ReviewAdminViewModel>
+@{
+    ViewData["Title"] = "Ревюта";
+}
+
+<h2>Всички ревюта</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Бръснар</th>
+            <th>Съдържание</th>
+            <th>Потребител</th>
+            <th>Дата</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.BarberName</td>
+                <td>@r.Content</td>
+                <td>@r.UserName</td>
+                <td>@r.CreatedOn.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="DeleteReview" asp-route-id="@r.Id" class="btn btn-danger btn-sm">Изтрий</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

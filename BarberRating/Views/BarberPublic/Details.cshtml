@@ -1,0 +1,43 @@
+﻿@model Barber
+@{
+    ViewData["Title"] = "Детайли за бръснар";
+}
+
+<h2>@Model.Name</h2>
+
+@if (!string.IsNullOrEmpty(Model.PhotoPath))
+{
+    <img src="@Model.PhotoPath" alt="Снимка на бръснар" class="img-fluid mb-3" style="max-width: 300px;" />
+}
+
+<p><strong>Описание:</strong> @Model.Description</p>
+
+<hr />
+
+<h4>Ревюта</h4>
+
+@if (Model.Reviews == null || !Model.Reviews.Any())
+{
+    <p>Все още няма ревюта.</p>
+}
+else
+{
+    foreach (var review in Model.Reviews.OrderByDescending(r => r.CreatedAt))
+    {
+        <div class="card mb-2">
+            <div class="card-body">
+                <p><strong>Потребител:</strong> @review.User.FirstName @review.User.LastName</p>
+                <p><strong>Оценка:</strong> @review.Rating / 5</p>
+                <p>@review.Content</p>
+                <p class="text-muted"><small>@review.CreatedAt.ToLocalTime().ToString("g")</small></p>
+            </div>
+        </div>
+    }
+}
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+{
+    <a asp-controller="Review" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-primary mt-3">
+        Добави ревю
+    </a>
+}

@@ -1,0 +1,35 @@
+﻿@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Админ табло";
+}
+
+<h2>Административно табло</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-light p-3 text-center">
+            <h4>Потребители</h4>
+            <p class="display-6">@Model.UserCount</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-light p-3 text-center">
+            <h4>Бръснари</h4>
+            <p class="display-6">@Model.BarberCount</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-light p-3 text-center">
+            <h4>Ревюта</h4>
+            <p class="display-6">@Model.ReviewCount</p>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="mt-4">
+    <a asp-action="Users" class="btn btn-primary me-2">Управление на потребители</a>
+    <a asp-controller="Barbers" asp-action="Index" class="btn btn-success me-2">Управление на бръснари</a>
+    <a asp-action="Reviews" class="btn btn-warning">Управление на ревюта</a>
+</div>

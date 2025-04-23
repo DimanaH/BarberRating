@@ -1,0 +1,28 @@
+﻿@model List<Review>
+@{
+    ViewData["Title"] = "Моите ревюта";
+}
+
+<h2>Моите ревюта</h2>
+
+@if (!Model.Any())
+{
+    <p>Все още не си оставил ревюта.</p>
+}
+else
+{
+    foreach (var review in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@review.Barber.Name</h5>
+                <p><strong>Оценка:</strong> @review.Rating / 5</p>
+                <p>@review.Content</p>
+                <p class="text-muted"><small>@review.CreatedAt.ToLocalTime().ToString("g")</small></p>
+
+                <a asp-action="Edit" asp-route-id="@review.Id" class="btn btn-warning btn-sm">Редактирай</a>
+                <a asp-action="Delete" asp-route-id="@review.Id" class="btn btn-danger btn-sm">Изтрий</a>
+            </div>
+        </div>
+    }
+}

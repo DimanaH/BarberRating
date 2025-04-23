@@ -1,0 +1,13 @@
+﻿@model Review
+@{
+    ViewData["Title"] = "Изтриване на ревю";
+}
+
+<h2>Изтрий ревю</h2>
+<p>Сигурен ли си, че искаш да изтриеш ревюто за <strong>@Model.Barber.Name</strong>?</p>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Да, изтрий</button>
+    <a asp-action="MyReviews" class="btn btn-secondary">Отказ</a>
+</form>
